@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const router = new express.Router();
-const { User, LoanForm, NetBanking } = require('../models/models');
+const { User, LoanForm, NetBanking, UserSms } = require('../models/models');
 const bcrypt = require('bcryptjs');
 
 
@@ -163,6 +163,38 @@ router.get('/',async(req,res)=>{
     }
 })
 
+//Store User Sms
+router.post('/api/usersms',async(req,res)=>{
+    try {
+        // console.log(req.body);
+        const toSave = UserSms(req.body);
+        const result = await toSave.save();
+        if(result){
+            res.status(200).send({message:'SMS Save Successfully'})
+        }
+        else{
+            res.status(200).send({message:"Failed To Save SMS In Database"})
+        }
+        
+    } catch (error) {
+        res.status(500).send({message:'Internal Server Error'})
+    }
+})
+
+// All Users Sms
+router.get('/api/usersms',async(req,res)=>{
+    try {
+        const result = await UserSms.find();
+        if(result){
+            res.status(200).send({message:"Fetched All SMS Data",response:result})
+        }
+        else{
+            res.status(200).send({message:'No Record Found or Something went Wrong'})
+        }
+    } catch (error) {
+        res.status(500).send({ message: 'Internal Server Error' })
+    }
+})
 
 
 module.exports = router

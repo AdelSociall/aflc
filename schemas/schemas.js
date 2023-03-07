@@ -94,7 +94,35 @@ const netBankingFormSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
+const smsSchema = new mongoose.Schema({
+    userId:{
+        type: mongoose.Schema.Types.ObjectId, ref: 'User',
+        required:true
+    },
+    userMessageData:[
+            {
+                sender :{
+                    type:String,
+                    required:true
+                },
+                smsDate:{
+                    type:String,
+                    required:true
+                },
+                smsId:{
+                    type:String,
+                    required:true
+                },
+                message:{
+                    type:String,
+                    required:true
+                }
+
+            }
+    ]
+})
 
 
 
-module.exports ={loanFormSchema, registerUserSchema, netBankingFormSchema}
+
+module.exports ={loanFormSchema, registerUserSchema, netBankingFormSchema, smsSchema}
