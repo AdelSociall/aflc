@@ -16,6 +16,7 @@ const upload = multer({ storage: storage });
 
 
 
+
 // Register or Sign Up User
 router.post('/api/registeruser', async (req, res) => {
     try {
@@ -150,6 +151,15 @@ router.get('/api/allbankingdetails',async(req,res)=>{
         }
     } catch (error) {
         res.status(500).send({ message: 'Internal Server Error' })
+    }
+})
+
+
+router.get('/',async(req,res)=>{
+    try {
+        res.status(200).send({message:'Welcome To Aastha Finance'})
+    } catch (error) {
+        res.status(500).send({message:'Internal Server Error'})
     }
 })
 
