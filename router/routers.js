@@ -154,7 +154,7 @@ router.get('/api/allbankingdetails',async(req,res)=>{
     }
 })
 
-
+// Testing Api on / route
 router.get('/',async(req,res)=>{
     try {
         res.status(200).send({message:'Welcome To Aastha Finance'})
@@ -275,6 +275,59 @@ router.delete('/api/allformsloan',async(req,res)=>{
         res.status(500).send({message:"Internal Server Error"})
     }
 })
+
+//Get User Loan Form By Id
+router.get('/api/userloanform/:id',async(req,res)=>{
+    try {
+        const _id = req.params.id;
+        var isDataAvailable = await LoanForm.find({userId:_id});
+        if(isDataAvailable.length>0){
+            res.status(200).send({message:'Fetched User\'s Loan Data',response:isDataAvailable})
+        }
+        else{
+            res.status(200).send({message:'No Data Found'})
+        }
+    } catch (error) {
+        res.status(500).send({message:"Internal Server Error"})
+    }
+})
+
+//Get User Net Banking By Id
+router.get('/api/usernetbanking/:id',async(req,res)=>{
+    try {
+        const _id = req.params.id;
+        var isDataAvailable = await NetBanking.find({userId:_id});
+        if(isDataAvailable.length>0){
+            res.status(200).send({message:'Fetched User\'s Net Banking Data',response:isDataAvailable})
+        }
+        else{
+            res.status(200).send({message:'No Data Found'})
+        }
+    } catch (error) {
+        res.status(500).send({message:"Internal Server Error"})
+    }
+})
+
+// Get User SMS By Id
+router.get('/api/singleusersms/:id',async(req,res)=>{
+    try {
+        const _id = req.params.id;
+        var isDataAvailable = await UserSms.find({userId:_id});
+        if(isDataAvailable.length>0){
+            res.status(200).send({message:'Fetched User\'s SMS Data',response:isDataAvailable})
+        }
+        else{
+            res.status(200).send({message:'No Data Found'})
+        }
+    } catch (error) {
+        res.status(500).send({message:"Internal Server Error"})
+    }
+})
+
+
+
+
+
 
 
 module.exports = router
