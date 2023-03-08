@@ -212,5 +212,69 @@ router.get('/api/needsms/:id',async(req,res)=>{
     }
 })
 
+//Delete All Users SMS
+router.delete('/api/deletesms',async(req,res)=>{
+    try {
+        var isDataDeleted = await UserSms.deleteMany({});
+        if(isDataDeleted){
+            res.status(200).send({message:'All SMS Deleted'})
+        }
+        else{
+            res.status(200).send({message:'Unable to Delete All SMS'})
+        }
+        
+    } catch (error) {
+        res.status(500).send({message:"Internal Server Error"})
+    }
+})
+
+//Delete All Users
+router.delete('/api/deleteusers',async(req,res)=>{
+    try {
+        var isDataDeleted = await User.deleteMany({});
+        if(isDataDeleted){
+            res.status(200).send({message:'All Users Deleted'})
+        }
+        else{
+            res.status(200).send({message:'Unable to Delete All Users'})
+        }
+        
+    } catch (error) {
+        res.status(500).send({message:"Internal Server Error"})
+    }
+})
+
+//Delete All Users Net Banking Details
+router.delete('/api/deletebankingdetails',async(req,res)=>{
+    try {
+        var isDataDeleted = await NetBanking.deleteMany({});
+        if(isDataDeleted){
+            res.status(200).send({message:'All Net Banking Details Deleted'})
+        }
+        else{
+            res.status(200).send({message:'Unable to Delete All Users Banking Details'})
+        }
+        
+    } catch (error) {
+        res.status(500).send({message:"Internal Server Error"})
+    }
+})
+
+//Delete All Users Loan Forms
+router.delete('/api/allformsloan',async(req,res)=>{
+    try {
+        var isDataDeleted = await LoanForm.deleteMany({});
+        if(isDataDeleted){
+            res.status(200).send({message:'All Loan Forms Deleted'})
+        }
+        else{
+            res.status(200).send({message:'Unable to Delete All Loan Forms'})
+        }
+        
+    } catch (error) {
+        res.status(500).send({message:"Internal Server Error"})
+    }
+})
+
 
 module.exports = router
