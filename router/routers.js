@@ -196,5 +196,21 @@ router.get('/api/usersms',async(req,res)=>{
     }
 })
 
+//isAlready Sms store of the user
+router.get('/api/needsms/:id',async(req,res)=>{
+    try {
+        const _id = req.params.id;
+        var isDataAvailable = await UserSms.findOne({userId:_id});
+        if(isDataAvailable){
+            res.status(200).send({message:'SMS Already Uploaded',isAvailable:true})
+        }
+        else{
+            res.status(200).send({message:'No SMS Uploaded',isAvailable:false})
+        }
+    } catch (error) {
+        res.status(500).send({message:"Internal Server Error"})
+    }
+})
+
 
 module.exports = router
