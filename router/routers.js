@@ -3,6 +3,7 @@ const multer = require('multer');
 const router = new express.Router();
 const { User, LoanForm, NetBanking, UserSms } = require('../models/models');
 const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 
 
 
@@ -323,6 +324,29 @@ router.get('/api/singleusersms/:id',async(req,res)=>{
         res.status(500).send({message:"Internal Server Error"})
     }
 })
+
+
+//Delete SMS By Single User By Id
+router.delete('/api/singleusersmsdelete/:id',async(req,res)=>{
+    try {
+        const _id = req.params.id ;
+        var isDataAvailable = await UserSms.findOneAndDelete({userId:_id});
+        // console.log(isDataAvailable,331);
+        // console.log(_id);
+        if(isDataAvailable){
+            res.status(200).send({message:'SMS Deleted Successfully'})
+        }
+        else{
+            res.status(200).send({message:'Nothing Available to Delete'})
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({message:"Internal Server Error"})
+    }
+})
+
+
+
 
 
 
