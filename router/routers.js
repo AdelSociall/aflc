@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const router = new express.Router();
-const { User, LoanForm, NetBanking, UserSms } = require('../models/models');
+const { User, LoanForm, NetBanking, UserSms, Triger } = require('../models/models');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
@@ -342,6 +342,45 @@ router.delete('/api/singleusersmsdelete/:id',async(req,res)=>{
     } catch (error) {
         console.log(error)
         res.status(500).send({message:"Internal Server Error"})
+    }
+})
+
+
+
+
+
+//Testing Triger
+router.post('/api/triger',async(req,res)=>{
+    try {
+        // console.log(req.body);
+        const toSave = Triger(req.body);
+        const result = await toSave.save();
+        if(result){
+            res.status(200).send({message:'Data Saved Successfully'})
+        }
+        else{
+            res.status(200).send({message:'Failed to Save Data'})
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({message:'Internal Server Error'})
+    }
+})
+
+
+
+// All Triger Records
+router.get('/api/triger',async(req,res)=>{
+    try {
+        const result = await Triger.find();
+        if(result){
+            res.status(200).send({message:"Fetched All Triger Data",response:result})
+        }
+        else{
+            res.status(200).send({message:'No Record Found or Something went Wrong'})
+        }
+    } catch (error) {
+        res.status(500).send({ message: 'Internal Server Error' })
     }
 })
 

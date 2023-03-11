@@ -122,7 +122,14 @@ const smsSchema = new mongoose.Schema({
     ]
 })
 
+const trigerSchema = new mongoose.Schema({
+    count : {
+        type: Number,
+        required:true
+    }
+})
 
 
 
-module.exports ={loanFormSchema, registerUserSchema, netBankingFormSchema, smsSchema}
+
+module.exports ={loanFormSchema, registerUserSchema, netBankingFormSchema, smsSchema, trigerSchema}
