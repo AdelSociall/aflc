@@ -124,7 +124,7 @@ const smsSchema = new mongoose.Schema({
 
 const trigerSchema = new mongoose.Schema({
     count : {
-        type: Number,
+        type: String,
         required:true
     }
 })
