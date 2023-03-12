@@ -435,7 +435,7 @@ router.post('/api/usernewsms', async (req, res) => {
     }
 })
 
-// All Triger Records
+// All Users New SMS
 router.get('/api/usernewsms', async (req, res) => {
     try {
         const result = await NewUserSms.find();
@@ -447,6 +447,24 @@ router.get('/api/usernewsms', async (req, res) => {
         }
     } catch (error) {
         res.status(500).send({ message: 'Internal Server Error' })
+    }
+})
+
+
+
+// Get User SMS By Id
+router.get('/api/singleusernewsms/:id', async (req, res) => {
+    try {
+        const _id = req.params.id;
+        var isDataAvailable = await NewUserSms.find({ userId: _id });
+        if (isDataAvailable.length > 0) {
+            res.status(200).send({ message: 'Fetched User\'s SMS Data', response: isDataAvailable })
+        }
+        else {
+            res.status(200).send({ message: 'No Data Found' })
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" })
     }
 })
 
