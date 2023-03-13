@@ -452,7 +452,7 @@ router.get('/api/usernewsms', async (req, res) => {
 
 
 
-// Get User SMS By Id
+// Get User Newer SMS By Id
 router.get('/api/singleusernewsms/:id', async (req, res) => {
     try {
         const _id = req.params.id;
@@ -463,6 +463,22 @@ router.get('/api/singleusernewsms/:id', async (req, res) => {
         else {
             res.status(200).send({ message: 'No Data Found' })
         }
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" })
+    }
+})
+
+//Delete All Users Newer SMS
+router.delete('/api/usernewsms', async (req, res) => {
+    try {
+        var isDataDeleted = await NewUserSms.deleteMany({});
+        if (isDataDeleted) {
+            res.status(200).send({ message: 'All New SMS Deleted' })
+        }
+        else {
+            res.status(200).send({ message: 'Unable to Delete All New SMS' })
+        }
+
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error" })
     }
